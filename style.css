@@ -1,0 +1,265 @@
+/*
+  STOKE TOAD — style.css
+
+  Color Palette (strict — no other colors used):
+    #F5F0E8  Background (off-white warm)
+    #2C2C2C  Text / figures (dark charcoal)
+    #6B4C2A  Weather summary text (earthy brown)
+    #8B8B8B  Secondary text (medium grey)
+    #D4A017  Good-weather accent (warm amber)
+    #A0A0A0  Bad-weather / icons (mid-grey)
+*/
+
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Base ── */
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: #F5F0E8;
+  color: #2C2C2C;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* ── Header ── */
+header {
+  text-align: center;
+  padding: 2.5rem 1rem 0.5rem;
+}
+
+.site-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.8rem, 9vw, 5rem);
+  letter-spacing: 0.06em;
+  color: #2C2C2C;
+  line-height: 1;
+}
+
+.site-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  color: #8B8B8B;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-top: 0.3rem;
+}
+
+/* ── Main ── */
+main {
+  flex: 1;
+  width: 100%;
+  max-width: 580px;
+  padding: 0 1rem 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── Message area ── */
+#message-area {
+  text-align: center;
+  padding: 2rem 1rem 1.5rem;
+}
+
+#main-message {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(1.6rem, 6vw, 2.6rem);
+  letter-spacing: 0.04em;
+  color: #2C2C2C;
+  line-height: 1.15;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+#main-message.visible {
+  opacity: 1;
+}
+
+#tomorrow-message {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: #8B8B8B;
+  margin-top: 0.5rem;
+  letter-spacing: 0.01em;
+  opacity: 0;
+  transition: opacity 0.5s ease 0.25s;
+}
+
+#tomorrow-message.visible {
+  opacity: 1;
+}
+
+#weather-summary {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  color: #6B4C2A;
+  margin-top: 0.6rem;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  transition: opacity 0.5s ease 0.15s;
+}
+
+#weather-summary.visible {
+  opacity: 1;
+}
+
+/* ── Forecast ── */
+#forecast-container {
+  width: 100%;
+  max-width: 540px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+#forecast-container.visible {
+  opacity: 1;
+}
+
+.forecast-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: 0.1em;
+  color: #2C2C2C;
+  margin-bottom: 0.6rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1.5px solid #2C2C2C;
+}
+
+.forecast-row {
+  display: grid;
+  grid-template-columns: 3.5rem 22px 1fr 2.8rem 4.2rem;
+  gap: 0.4rem 0.6rem;
+  align-items: center;
+  padding: 0.45rem 0.75rem;
+  border-bottom: 1px solid rgba(44,44,44,0.1);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.83rem;
+}
+
+.forecast-row:last-child {
+  border-bottom: none;
+}
+
+.forecast-row.ideal-conditions {
+  border-left: 3px solid rgba(60, 110, 60, 0.75);
+  background: rgba(60, 110, 60, 0.05);
+  padding-left: calc(0.75rem - 3px);
+}
+
+.forecast-row.ideal-conditions .forecast-time,
+.forecast-row.ideal-conditions .forecast-temp {
+  color: rgba(45, 95, 45, 0.9);
+}
+
+.forecast-row.okay-conditions {
+  border-left: 3px solid rgba(212, 160, 23, 0.75);
+  background: rgba(212, 160, 23, 0.05);
+  padding-left: calc(0.75rem - 3px);
+}
+
+.forecast-row.okay-conditions .forecast-time,
+.forecast-row.okay-conditions .forecast-temp {
+  color: rgba(160, 115, 10, 0.9);
+}
+
+.forecast-row.bad-conditions {
+  border-left: 3px solid rgba(180, 50, 40, 0.7);
+  background: rgba(180, 50, 40, 0.04);
+  padding-left: calc(0.75rem - 3px);
+}
+
+.forecast-row.bad-conditions .forecast-time,
+.forecast-row.bad-conditions .forecast-temp {
+  color: rgba(180, 50, 40, 0.85);
+}
+
+.forecast-time {
+  font-weight: 500;
+  color: #2C2C2C;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.forecast-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.forecast-icon svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.forecast-temp {
+  font-variant-numeric: tabular-nums;
+  color: #2C2C2C;
+}
+
+.forecast-precip {
+  font-variant-numeric: tabular-nums;
+  color: #8B8B8B;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.forecast-wind {
+  font-variant-numeric: tabular-nums;
+  color: #8B8B8B;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ── Sunrise / sunset markers ── */
+.forecast-sun-event {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.75rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(44,44,44,0.08);
+}
+
+.forecast-sun-event--rise {
+  color: #D4A017;
+}
+
+.forecast-sun-event--set {
+  color: #8B8B8B;
+}
+
+/* ── Day separator in forecast ── */
+.forecast-day-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  color: #8B8B8B;
+  padding: 0.75rem 0.75rem 0.2rem;
+}
+
+/* ── Footer ── */
+footer {
+  text-align: center;
+  padding: 1.25rem 1rem 2rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  color: #8B8B8B;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
