@@ -1,13 +1,18 @@
 /*
   STOKE TOAD — style.css
+  Aesthetic: Frog and Toad picture books (Arnold Lobel)
 
-  Color Palette (strict — no other colors used):
-    #F5F0E8  Background (off-white warm)
-    #2C2C2C  Text / figures (dark charcoal)
-    #6B4C2A  Weather summary text (earthy brown)
-    #8B8B8B  Secondary text (medium grey)
-    #D4A017  Good-weather accent (warm amber)
-    #A0A0A0  Bad-weather / icons (mid-grey)
+  Color Palette:
+    #EDE8D5  Background (aged parchment)
+    #2E2A1E  Text (warm dark brown)
+    #7A7060  Muted text / secondary (warm grey-brown)
+    #5C7A4A  Sage green — accent
+    #4A8035  Ideal conditions border
+    #A07810  Okay conditions border
+    #B03C3C  Bad conditions border
+    #9A9690  Rock grey — mid grey
+    #6A6660  Dark rock — borders, icons
+    #907830  Amber — sunrise / sun icons
 */
 
 /* ── Reset ── */
@@ -24,13 +29,45 @@ html {
 }
 
 body {
-  background-color: #F5F0E8;
-  color: #2C2C2C;
-  font-family: 'Inter', sans-serif;
+  background-color: #E4E8E0;
+  color: #2E2A1E;
+  font-family: 'Patrick Hand', cursive;
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
+  position: relative; /* needed for absolute cliff columns */
+}
+
+/* ── Cliff columns ── */
+.cliff-col {
+  position: absolute;
+  top: 0;
+  width: 120px;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.cliff-col--left  { left: 0; }
+.cliff-col--right { right: 0; }
+
+
+/* fade into page background at the bottom */
+.cliff-col::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 140px;
+  background: linear-gradient(to top, #E4E8E0 0%, transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+
+/* hide cliffs on narrow viewports */
+@media (max-width: 840px) {
+  .cliff-col { display: none; }
 }
 
 /* ── Header ── */
@@ -40,20 +77,20 @@ header {
 }
 
 .site-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(2.8rem, 9vw, 5rem);
-  letter-spacing: 0.06em;
-  color: #2C2C2C;
+  font-family: 'Boogaloo', cursive;
+  font-size: clamp(3rem, 10vw, 5.5rem);
+  color: #2E2A1E;
   line-height: 1;
+  letter-spacing: 0.02em;
 }
 
 .site-sub {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.8rem;
-  color: #8B8B8B;
-  letter-spacing: 0.18em;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 0.95rem;
+  color: #7A7060;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  margin-top: 0.3rem;
+  margin-top: 0.25rem;
 }
 
 /* ── Main ── */
@@ -74,11 +111,11 @@ main {
 }
 
 #main-message {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(1.6rem, 6vw, 2.6rem);
-  letter-spacing: 0.04em;
-  color: #2C2C2C;
-  line-height: 1.15;
+  font-family: 'Boogaloo', cursive;
+  font-size: clamp(1.7rem, 6vw, 2.7rem);
+  color: #2E2A1E;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
   opacity: 0;
   transition: opacity 0.5s ease;
 }
@@ -88,11 +125,10 @@ main {
 }
 
 #tomorrow-message {
-  font-family: 'Inter', sans-serif;
-  font-size: 1rem;
-  color: #8B8B8B;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.05rem;
+  color: #7A7060;
   margin-top: 0.5rem;
-  letter-spacing: 0.01em;
   opacity: 0;
   transition: opacity 0.5s ease 0.25s;
 }
@@ -102,11 +138,10 @@ main {
 }
 
 #weather-summary {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.875rem;
-  color: #6B4C2A;
-  margin-top: 0.6rem;
-  letter-spacing: 0.02em;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 0.92rem;
+  color: #5C7A4A;
+  margin-top: 0.55rem;
   opacity: 0;
   transition: opacity 0.5s ease 0.15s;
 }
@@ -128,13 +163,13 @@ main {
 }
 
 .forecast-heading {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.4rem;
-  letter-spacing: 0.1em;
-  color: #2C2C2C;
+  font-family: 'Boogaloo', cursive;
+  font-size: 1.5rem;
+  letter-spacing: 0.06em;
+  color: #2E2A1E;
   margin-bottom: 0.6rem;
   padding-bottom: 0.3rem;
-  border-bottom: 1.5px solid #2C2C2C;
+  border-bottom: 2px solid #9A9690;
 }
 
 .forecast-row {
@@ -143,9 +178,9 @@ main {
   gap: 0.4rem 0.6rem;
   align-items: center;
   padding: 0.45rem 0.75rem;
-  border-bottom: 1px solid rgba(44,44,44,0.1);
-  font-family: 'Inter', sans-serif;
-  font-size: 0.83rem;
+  border-bottom: 1px solid rgba(154, 150, 144, 0.22);
+  font-family: 'Patrick Hand', cursive;
+  font-size: 0.92rem;
 }
 
 .forecast-row:last-child {
@@ -153,41 +188,58 @@ main {
 }
 
 .forecast-row.ideal-conditions {
-  border-left: 3px solid rgba(60, 110, 60, 0.75);
-  background: rgba(60, 110, 60, 0.05);
-  padding-left: calc(0.75rem - 3px);
+  border-left: 4px solid #4A8035;
+  background: rgba(74, 128, 53, 0.10);
+  padding-left: calc(0.75rem - 4px);
 }
 
 .forecast-row.ideal-conditions .forecast-time,
 .forecast-row.ideal-conditions .forecast-temp {
-  color: rgba(45, 95, 45, 0.9);
+  color: #2D5C1E;
 }
 
 .forecast-row.okay-conditions {
-  border-left: 3px solid rgba(212, 160, 23, 0.75);
-  background: rgba(212, 160, 23, 0.05);
-  padding-left: calc(0.75rem - 3px);
+  border-left: 4px solid #A07810;
+  background: rgba(160, 120, 16, 0.09);
+  padding-left: calc(0.75rem - 4px);
 }
 
 .forecast-row.okay-conditions .forecast-time,
 .forecast-row.okay-conditions .forecast-temp {
-  color: rgba(160, 115, 10, 0.9);
+  color: #705408;
 }
 
 .forecast-row.bad-conditions {
-  border-left: 3px solid rgba(180, 50, 40, 0.7);
-  background: rgba(180, 50, 40, 0.04);
-  padding-left: calc(0.75rem - 3px);
+  border-left: 4px solid #B03C3C;
+  background: rgba(176, 60, 60, 0.09);
+  padding-left: calc(0.75rem - 4px);
 }
 
 .forecast-row.bad-conditions .forecast-time,
 .forecast-row.bad-conditions .forecast-temp {
-  color: rgba(180, 50, 40, 0.85);
+  color: #8C2222;
+}
+
+/* ── Nighttime hour rows ── */
+.forecast-row.nighttime-hour {
+  background-color: rgba(20, 25, 40, 0.18);
+}
+
+.forecast-row.ideal-conditions.nighttime-hour {
+  background: rgba(30, 70, 25, 0.22);
+}
+
+.forecast-row.okay-conditions.nighttime-hour {
+  background: rgba(110, 82, 10, 0.22);
+}
+
+.forecast-row.bad-conditions.nighttime-hour {
+  background: rgba(130, 35, 35, 0.22);
 }
 
 .forecast-time {
-  font-weight: 500;
-  color: #2C2C2C;
+  font-weight: 400;
+  color: #2E2A1E;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
 }
@@ -206,19 +258,19 @@ main {
 
 .forecast-temp {
   font-variant-numeric: tabular-nums;
-  color: #2C2C2C;
+  color: #2E2A1E;
 }
 
 .forecast-precip {
   font-variant-numeric: tabular-nums;
-  color: #8B8B8B;
+  color: #7A7060;
   text-align: right;
   white-space: nowrap;
 }
 
 .forecast-wind {
   font-variant-numeric: tabular-nums;
-  color: #8B8B8B;
+  color: #7A7060;
   text-align: right;
   white-space: nowrap;
 }
@@ -229,27 +281,27 @@ main {
   align-items: center;
   gap: 0.5rem;
   padding: 0.4rem 0.75rem;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.75rem;
-  letter-spacing: 0.06em;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  border-bottom: 1px solid rgba(44,44,44,0.08);
+  border-bottom: 1px solid rgba(154, 150, 144, 0.18);
 }
 
 .forecast-sun-event--rise {
-  color: #D4A017;
+  color: #907830;
 }
 
 .forecast-sun-event--set {
-  color: #8B8B8B;
+  color: #7A7060;
 }
 
 /* ── Day separator in forecast ── */
 .forecast-day-label {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1rem;
-  letter-spacing: 0.1em;
-  color: #8B8B8B;
+  font-family: 'Boogaloo', cursive;
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+  color: #7A7060;
   padding: 0.75rem 0.75rem 0.2rem;
 }
 
@@ -257,9 +309,17 @@ main {
 footer {
   text-align: center;
   padding: 1.25rem 1rem 2rem;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.72rem;
-  color: #8B8B8B;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 0.82rem;
+  color: #7A7060;
+  letter-spacing: 0.06em;
+}
+
+/* ── Hopping toad ── */
+.hopping-toad {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
 }
